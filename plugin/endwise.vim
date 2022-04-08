@@ -65,9 +65,13 @@ augroup endwise " {{{1
   autocmd FileType verilog
         \ let b:endwise_addition = '\=submatch(0)=="casex" ? "endcase" : "end" . submatch(0)' |
         \ let b:endwise_words = 'begin,module,case,function,primitive,specify,task' |
-        \ let b:endwise_pattern = '\<\%(\zs\zebegin\|module\|case\|casex\|function\|primitive\|specify\|task\)\>' |
+        \ let b:endwise_pattern = '\<\%(\zs\zebegin\|module\|case\|function\|primitive\|specify\|task\)\>.*$' |
         \ let b:endwise_syngroups = 'verilogConditional,verilogLabel,verilogStatement'
-  "      \ let b:endwise_pattern = '\<\%(\zs\zebegin\|module\|case\|function\|primitive\|specify\|task\)\>.*$' |
+  autocmd FileType systemverilog
+        \ let b:endwise_addition = '\=submatch(0)=="casex" ? "endcase" : "end" . submatch(0)' |
+        \ let b:endwise_words = 'begin,module,case,function,primitive,specify,task' |
+        \ let b:endwise_pattern = '\<\%(\zs\zebegin\|module\|case\|function\|primitive\|specify\|task\)\>.*$' |
+        \ let b:endwise_syngroups = 'verilogConditional,verilogLabel,verilogStatement'
   autocmd FileType matlab
         \ let b:endwise_addition = 'end' |
         \ let b:endwise_words = 'function,if,for' |
